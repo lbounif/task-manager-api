@@ -3,7 +3,7 @@
 import mongoose from "mongoose"
 import validator from "validator"
 
-const taskSchema = new mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -22,6 +22,6 @@ const taskSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const task = mongoose.model("Task", TaskSchema)
+const Task = mongoose.model("Task", TaskSchema)
 
 export default Task
