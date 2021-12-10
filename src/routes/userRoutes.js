@@ -1,10 +1,12 @@
-
 import express from "express"
 import { addNewUser, 
         getAllUsers,
         getUserById,
         updateUser,
-        deleteUser} from "../controllers/userController.js"
+        deleteUser,
+        registerUser,
+        loginUser} from "../controllers/userController.js"
+import auth from "../middleware/auth.js"
 
 const router = new express.Router()
 
@@ -13,9 +15,13 @@ const router = new express.Router()
 //R: Read => GET
 //U: Update: PUT- PATCH
 //D: Delete: DELETE
-router.post("/users",addNewUser)
-router.get("/users",getAllUsers)
-router.get("/users/:id", getUserById)
+router.post("/users", addNewUser)
+router.post("/register", registerUser)
+
+router.post("/users/login", loginUser)
+
+router.get("/users", auth, getAllUsers)
+router.get("/users/:id", auth,getUserById)
 router.put("/users/:id", updateUser)
 router.delete("/users/:id", deleteUser)
 

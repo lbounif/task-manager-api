@@ -1,5 +1,4 @@
 import express from "express"
-
 import { getCompletedTasks, 
         addNewTask,
         getTaskById } from "../controllers/taskController.js"
