@@ -207,6 +207,29 @@ const deleteUser = async(req, res) => {
     }
     
 }
+
+const logoutUser = async(req, res) => {
+    try {
+        //remove req.token from user.tokens array
+        req.user.tokens = req.user.tokens.filter(elem =>{
+            return elem.token != req.token
+        })
+        await req.user.save()
+        res.status(200).json({
+            message: "User logout successfully",
+            data: req.user
+        })
+    } catch(err){
+        console.log(`Error: ${err}`)
+        res.status(500).json({
+            message: "Internal server error",
+            data: err
+        })
+    }
+}
+const logoutAllUser = async(req, res) => {
+
+}
 export {
     addNewUser,
     registerUser,
@@ -214,5 +237,7 @@ export {
     getAllUsers,
     getUserById,
     updateUser,
-    deleteUser
+    deleteUser,
+    logoutUser,
+    logoutAllUser
 }
